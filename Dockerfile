@@ -4,7 +4,7 @@ RUN apt-get update && apt install -y \
     ca-certificates \
     gcc \
     ninja-build \
-    gettext cmake unzip curl \
+    gettext cmake unzip curl wget \
     git \
     python3 python-dev-is-python3 python3.10-venv \
     locales \
