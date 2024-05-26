@@ -1,0 +1,1 @@
+nvim --headless "+Lazy! sync" +MasonUpdate +TSUpdateSync "+sleep 5" +qa

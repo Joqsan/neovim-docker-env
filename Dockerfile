@@ -9,23 +9,14 @@ RUN apt-get update && apt install -y \
     python3 python-dev-is-python3 python3.10-venv \
     locales \
     nodejs npm \
-    ripgrep
+    ripgrep \
+    fd-find && ln -s $(which fdfind) /usr/local/bin/fd
 
 # https://stackoverflow.com/a/33379487/6819878
 RUN locale-gen en_US.UTF-8 \
     && export LANG=en_US.UTF-8 
 
-# RUN apt install -y neovim
-RUN git clone https://github.com/neovim/neovim.git
-
-RUN cd neovim \
-    && make CMAKE_BUILD_TYPE=RelWithDebInfo \
-    && git checkout stable \
-    && make install
-
-
-# # RUN git clone --depth 1 https://github.com/neovim/neovim.git \
-# #     && cd neovim \
-# #     && git fetch --unshallow \
-# #     && git pull --all
-
+RUN curl -kLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz \
+    && rm -rf /opt/nvim \
+    && tar -C /opt -xzf nvim-linux64.tar.gz \
+    && echo 'export PATH="$PATH:/opt/nvim-linux64/bin"' >> $HOME/.bashrc
